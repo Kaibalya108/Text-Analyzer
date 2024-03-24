@@ -3,7 +3,7 @@ import Navbar from './Components/Navbar';
 import Alert from './Components/Alert';
 import TextArea from './Components/TextArea';
 import About from './Components/About';
-
+// import './App.css';
 import {
   BrowserRouter as Router,
   Switch,
@@ -30,7 +30,7 @@ function App() {
   const modeToggling = () => {
     if (mode === 'light') {
       setMode('dark');
-      document.body.style.backgroundColor = '#12161a';
+      document.body.style.backgroundColor = '#202427';
       showAlert("Dark mode Enabled", "success");
     } else {
       setMode('light');
@@ -41,7 +41,7 @@ function App() {
 
   return (
     <Router>
-      <Navbar title="TextUtils" mode={mode} toggleMode={modeToggling} />
+      <Navbar title="TextAnalyzer" mode={mode} toggleMode={modeToggling} />
       <Alert alert={alert} />
     
       <div className="container my-5">

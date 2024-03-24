@@ -31,8 +31,8 @@ export default function TextArea(props) {
     }
   };
   
-  const handleOnChange = (e) => {
-    setText(e.target.value);
+  const handleOnChange = (event) => {
+    setText(event.target.value);
     console.log("On Change");
   };
   const calculateWordCount = () => {
@@ -43,7 +43,7 @@ export default function TextArea(props) {
       return 0;
     }
     // Split the trimmed text by spaces and count the words
-    return trimmedText.split(/\s+/).length;
+    return trimmedText.split(" ").filter((element)=>{return element.length!==0}).length;
   };
   const clearText = (e) => {
     e.preventDefault();
@@ -55,21 +55,18 @@ export default function TextArea(props) {
       setText(' ');
     }
   }
-  const handleCopy = (e) => 
-  {
+  const handleCopy = (e) => {
     e.preventDefault();
     let txt = document.getElementById("textBox");
     if (txt.value === '') {
       setEmpty(true); // Set state to indicate an empty textarea
     } else {
-      txt.select();
-    txt.setSelectionRange(0,txt.length);
-    navigator.clipboard.writeText(txt.value);
-    window.alert("Text copied to clipboard")
+      txt.select(); // Select the textarea content
+      txt.setSelectionRange(0, txt.value.length); // Set the selection range to the entire text
+      navigator.clipboard.writeText(txt.value); // Copy the selected text to the clipboard
+      window.alert("Text copied to clipboard");
     }
-    
-    
-  }
+  };
   const handleSpace = (e) =>
   {
     e.preventDefault();
@@ -93,19 +90,19 @@ export default function TextArea(props) {
           <label htmlFor="exampleFormControlTextarea1">
             <h3 style={{color:props.mode === 'dark'?'white':'black'}}>{props.heading}</h3>
           </label>
-          <textarea className="form-control" id="textBox" rows="5" placeholder="Enter text" value={text} style = {{backgroundColor: props.mode === 'dark'? 'grey':'white',color: props.mode === 'dark'? 'white':'black'}}onChange={handleOnChange} ></textarea>
+          <textarea className="form-control" id="textBox" rows="5" placeholder="Enter text" value={text} style = {{backgroundColor: props.mode === 'dark'? '#151332':'white',color: props.mode === 'dark'? 'white':'black'}}onChange={handleOnChange} ></textarea>
           <button className="btn btn-primary my-3" onClick={toUpperCase}>
             Convert to Uppercase
           </button>
-          <button className="btn btn-primary mx-2" onClick={toLowerCase}>Convert to Lowercase</button>
-          <button className="btn btn-primary" onClick={clearText}>Clear Text</button>
-          <button className="btn btn-primary mx-2" onClick={handleCopy}>Copy Text</button>
-          <button className="btn btn-primary mx-2" onClick={handleSpace}>Remove Extra Spaces</button>
+          <button className="btn btn-primary mx-2 my-1" onClick={toLowerCase}>Convert to Lowercase</button>
+          <button className="btn btn-primary mx-2 my-1" onClick={clearText}>Clear Text</button>
+          <button className="btn btn-primary mx-2 my-1" onClick={handleCopy}>Copy Text</button>
+          <button className="btn btn-primary mx-2 my-1" onClick={handleSpace}>Remove Extra Spaces</button>
         </div>
         <div className="container">
           <h2 style={{color:props.mode === 'dark'?'white':'black'}}>Text Summary</h2>
           <p style = {{color:props.mode==='dark'?'white':'black'}}>{calculateWordCount()} words, {text.length} characters.</p>
-          <p style = {{color:props.mode==='dark'?'white':'black'}}>{0.008 * calculateWordCount()} minutes to read.</p>
+          <p style = {{color:props.mode==='dark'?'white':'black'}}>{0.008 * text.split(" ").filter((element)=>{return element.length!==0}).length} minutes to read.</p>
           <h2 style={{color:props.mode === 'dark'?'white':'black'}}>Preview</h2>
           <p style = {{color:props.mode==='dark'?'white':'black',border: '1px solid black',overflow:'hidden'}}  className="my-4">{text}</p>
         </div>

@@ -24,18 +24,7 @@ export default function Navbar(props) {
       <li className="nav-item active">
         <Link className="nav-link" to="/about">About <span className="sr-only">(current)</span></Link>
         </li>
-      {/* For Dropdown Menu */}
-      {/* <li className="nav-item dropdown">
-        <a className="nav-link dropdown-toggle" to="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Dropdown
-        </a>
-        <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a className="dropdown-item" to="#">Action</a>
-          <a className="dropdown-item" to="#">Another action</a>
-          <div className="dropdown-divider"></div>
-          <a className="dropdown-item" to="#">Something else here</a>
-        </div>
-      </li> */}
+      
 
     </ul>
    
